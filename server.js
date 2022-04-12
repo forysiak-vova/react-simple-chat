@@ -14,6 +14,7 @@ const { default: socked } = require('./src/components/socked');
 
 app.use(cors());
 app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 // app.use(function (req, res, next) {
 //   res.header('Access-Control-Allow-Origin', '*');
@@ -26,8 +27,15 @@ app.use(express.json());
 
 const rooms = new Map();
 
-app.get('/rooms', (req, res) => {
-  res.json(rooms);
+app.get('/rooms/:id', (req, res) => {
+  const { id: roomId } = req.params;
+  const obj = rooms.has(roomId)
+    ? {
+        users: [...rooms.get(roomId).get('users').values()],
+        messages: [...rooms.get(roomId).get('messages').values()],
+      }
+    : { users: [], messages: [] };
+  res.json(obj);
 });
 
 app.post('/rooms', (req, res) => {
@@ -50,7 +58,16 @@ io.on('connection', socket => {
     socket.join(roomId);
     rooms.get(roomId).get('users').set(socket.id, userName);
     const users = [...rooms.get(roomId).get('users').values()];
-    socket.to(roomId).emit('ROOM:JOINED', users);
+    socket.to(roomId).emit('ROOM:SET_USERS', users);
+  });
+
+  socket.on('disconnect', () => {
+    rooms.forEach((value, roomId) => {
+      if (value.get('users').delete(socket.id)) {
+        const users = [...value.get('users').values()];
+        socket.to(roomId).emit('ROOM:SET_USERS', users);
+      }
+    });
   });
 
   console.log('user connected', socket.id);

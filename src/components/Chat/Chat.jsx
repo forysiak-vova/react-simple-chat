@@ -21,15 +21,17 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 
   return (
     <div className="chat">
-      <div className="chat-users">
-        room: <b>{roomId}</b>
+      <div className="chat-users" style={{ fontSize: 20 }}>
+        room: <b style={{ fontSize: 20 }}>{roomId}</b>
         <hr />
-        {/* <b>Онлайн ({users.length}):</b> */}
-        {/* <ul>
+        <b style={{ fontSize: 10 }}>Онлайн ({users.length}):</b>
+        <ul>
           {users.map((name, index) => (
-            <li key={name + index}>{name}</li>
+            <li style={{ fontSize: 10 }} key={name + index}>
+              {name}
+            </li>
           ))}
-        </ul> */}
+        </ul>
       </div>
       <div className="chat-messages">
         <div ref={messagesRef} className="messages">
