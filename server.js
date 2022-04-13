@@ -8,6 +8,7 @@ const io = require('socket.io')(server, {
     origin: '*',
   },
 });
+const path = require('path');
 
 var cors = require('cors');
 const { default: socked } = require('./src/components/socked');
@@ -82,9 +83,17 @@ io.on('connection', socket => {
   console.log('user connected', socket.id);
 });
 
-server.listen(20100, err => {
+const port = process.env.PORT || 20100;
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+  app.get('*', (req, res) => {
+    req.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
+server.listen(port, err => {
   if (err) {
     throw Error(err);
   }
-  console.log('Сервер запущений!');
+  console.log('Сервер запущений!', port);
 });
