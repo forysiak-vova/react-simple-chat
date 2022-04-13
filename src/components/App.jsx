@@ -35,9 +35,16 @@ export const App = () => {
     });
   };
 
+  const addMessage = message => {
+    dispatch({
+      type: 'NEW_MESSAGE',
+      payload: message,
+    });
+  };
   React.useEffect(() => {
     // socket.on('ROOM:JOINED', setUsers);
     socket.on('ROOM:SET_USERS', setUsers);
+    socket.on('ROOM:NEW_MESSAGE', addMessage);
   }, []);
 
   // console.log(state);
@@ -56,7 +63,11 @@ export const App = () => {
         marginTop: '50px',
       }}
     >
-      {!state.joined ? <JoinBlock onLogin={onLogin} /> : <Chat {...state} />}
+      {!state.joined ? (
+        <JoinBlock onLogin={onLogin} />
+      ) : (
+        <Chat {...state} onAddMessage={addMessage} />
+      )}
     </div>
   );
 };

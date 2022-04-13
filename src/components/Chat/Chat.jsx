@@ -1,5 +1,5 @@
 import React from 'react';
-import socket from '../socked/';
+import socket from '../socked/soked';
 
 function Chat({ users, messages, userName, roomId, onAddMessage }) {
   const [messageValue, setMessageValue] = React.useState('');
@@ -35,15 +35,21 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
       </div>
       <div className="chat-messages">
         <div ref={messagesRef} className="messages">
-          {/* {messages.map(message => (
-            <div className="message">
+          {messages.map(message => (
+            <div
+              key={message.text}
+              style={{ fontSize: 10 }}
+              className="message"
+            >
               <p>{message.text}</p>
               <div>
-                <span>{message.userName}</span>
+                <span style={{ fontSize: 10 }}>{message.userName}</span>
               </div>
             </div>
-          ))} */}
-          <div className="message">us</div>
+          ))}
+          <div style={{ fontSize: 10 }} className="message">
+            users
+          </div>
         </div>
         <form>
           <textarea
