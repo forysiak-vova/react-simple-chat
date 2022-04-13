@@ -82,7 +82,6 @@ io.on('connection', socket => {
 
   console.log('user connected', socket.id);
 });
-const path = require('path');
 
 const port = process.env.PORT || 20100;
 
