@@ -35,9 +35,9 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
       </div>
       <div className="chat-messages">
         <div ref={messagesRef} className="messages">
-          {messages.map(message => (
+          {messages.map((message, index) => (
             <div
-              key={message.text}
+              key={message + index}
               style={{ fontSize: 10 }}
               className="message"
             >

@@ -8,6 +8,13 @@ const redusers = (state, action) => {
         roomId: action.payload.roomId,
       };
 
+    case 'SET_DATA':
+      return {
+        ...state,
+        users: action.payload.users,
+        messages: action.payload.messages,
+      };
+
     case 'SET_USERS':
       return {
         ...state,
