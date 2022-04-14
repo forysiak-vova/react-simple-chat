@@ -8,7 +8,7 @@ const io = require('socket.io')(server, {
     origin: '*',
   },
 });
-const path = require('path');
+// const path = require('path');
 
 var cors = require('cors');
 const { default: socked } = require('./src/components/socked');
@@ -85,12 +85,12 @@ io.on('connection', socket => {
 
 const port = process.env.PORT || 20100;
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('build'));
-  app.get('*', (req, res) => {
-    req.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('build'));
+//   app.get('*', (req, res) => {
+//     req.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+//   });
+// }
 server.listen(port, err => {
   if (err) {
     throw Error(err);
