@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 // const useSocked = require('socket.io');
 
@@ -83,6 +82,7 @@ io.on('connection', socket => {
   console.log('user connected', socket.id);
 });
 
+const path = require('path');
 const port = process.env.PORT || 20100;
 
 if (process.env.NODE_ENV === 'production') {
