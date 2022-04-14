@@ -83,32 +83,33 @@ io.on('connection', socket => {
   console.log('user connected', socket.id);
 });
 
-// const port = process.env.PORT || 20100;
-
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('build'));
-//   app.get('*', (req, res) => {
-//     req.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-//   });
-// }
-// server.listen(port, err => {
-//   if (err) {
-//     throw Error(err);
-//   }
-//   console.log('Сервер запущений!', port);
-// });
-const publickPath = path.join(__dirname, '. .', 'public');
 const port = process.env.PORT || 20100;
 
-app.use(express.static(publickPath));
-
-app.get('*', (req, res) => {
-  req.sendFile(path.join(publickPath, 'index.html'));
-});
-
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+  app.get('*', (req, res) => {
+    req.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
 server.listen(port, err => {
   if (err) {
     throw Error(err);
   }
   console.log('Сервер запущений!', port);
 });
+
+// const publickPath = path.join(__dirname, '. .', 'public');
+// const port = process.env.PORT || 20100;
+
+// app.use(express.static(publickPath));
+
+// app.get('*', (req, res) => {
+//   req.sendFile(path.join(publickPath, 'index.html'));
+// });
+
+// server.listen(port, err => {
+//   if (err) {
+//     throw Error(err);
+//   }
+//   console.log('Сервер запущений!', port);
+// });
