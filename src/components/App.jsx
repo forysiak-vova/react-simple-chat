@@ -5,7 +5,6 @@ import reducer from './reduscer/reducer';
 // import socked from './socked';
 import socket from './socked/soked';
 import Chat from './Chat/Chat';
-import '../../build/static/css/main.04108082.css';
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:20100');
 axios.defaults.baseURL = 'http://localhost:20100';
