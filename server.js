@@ -9,8 +9,8 @@ const io = require('socket.io')(server, {
   },
 });
 
-var cors = require('cors');
-const { default: socked } = require('./src/components/socked');
+// var cors = require('cors');
+// const { default: socked } = require('./src/components/socked');
 
 app.use(cors());
 app.use(express.json());
