@@ -1,3 +1,3 @@
 import io from 'socket.io-client';
-const socket = io('http://localhost:20100');
+const socket = io('https://node-react-simple-chat.herokuapp.com/');
 export default socket;
